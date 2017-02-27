@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0;padding:0;}
+		body{background-color:#ccc;}
+		div{width:440px;height:100px;margin:0 auto;overflow:hidden;}
+		ul{width:1100px;height:100px;list-style:none;margin-left:0;}
+		ul>li{width:100px;height:100px;float:left;cursor:pointer;margin-right:10px;
+			text-align:center;line-height:100px;font-size:50px;}
+	</style>
+	<script src="../js/jquery-1.11.1.min.js"></script>
+	<script>
+		var int=null;
+		function picflow(parent){
+			parent.children().on('click',function(){	
+				parent.children().off('click');
+				var index=$(this).index();				
+				for(var i=0;i<index;i++){
+					var li=parent.children().eq(i).clone(true);
+					parent.append(li);	
+				}
+				parent.animate({'marginLeft':-110*index+'px'},function(){
+					for(var j=0;j<index;j++){
+						parent.children().eq(0).remove();			
+					}
+					parent.css("marginLeft",0);
+					picflow(parent);
+				});
+
+			});
+		}
+		function interval(parent){
+			int=setInterval(function(){
+				var li=parent.children().eq(0).clone(true);
+				parent.append(li);
+				parent.animate({'marginLeft':'-110px'},function(){
+					parent.children().eq(0).remove();
+					parent.css("marginLeft",0);
+				});
+			},2000);
+			parent.children().hover(function(){
+				clearInterval(int);
+			},function(){
+				int=setInterval(function(){
+					var li=parent.children().eq(0).clone(true);
+					parent.append(li);
+					parent.animate({'marginLeft':'-110px'},function(){
+						parent.children().eq(0).remove();
+						parent.css("marginLeft",0);
+					});
+				},2000);
+			});
+		}
+		var move=0;
+		var _x=null;
+		var mleft=0;
+		var isMove=0;
+		function drag(parent){
+			
+			parent.on({
+				mousedown:function(e){
+					move=1;
+					_x=e.clientX;
+					mleft=parseInt(parent.css("margin-left").replace("px",""));
+				},
+				mousemove:function(e){
+					if(move==1){
+						isMove=1;
+						parent.children().off('click');
+						clearInterval(int)
+						var x=e.clientX;
+						var x1=x-_x+mleft;
+						if(x-_x>0){
+							_x=_x+110;
+							mleft=0;
+							var li=parent.children().eq(parent.children().length-1).clone(true);
+							parent.prepend(li);
+							parent.children().eq(parent.children().length-1).remove();
+							parent.css("margin-left","－110px");
+							
+						}else
+						if(x-_x<-110){
+							_x=_x-110;
+							mleft=0;
+							var li=parent.children().eq(0).clone(true);
+							parent.append(li);
+							parent.children().eq(0).remove();
+							parent.css("margin-left","0px");		
+							
+						}else{
+							parent.css("margin-left",x1+"px");		
+						}
+								
+					} 
+				},
+				mouseup:function(e){
+					move=0;
+					if(isMove==1){
+						parent.css("margin-left","0px");
+						isMove=0;
+						picflow($('ul'));
+					}	
+				}
+			})
+			
+		}
+		$(function(){
+			drag($('ul'));
+			interval($('ul'));
+			picflow($('ul'));
+		});
+	</script>
+</head>
+<body onselectstart="return false">
+	<div>
+		<ul>
+			<li num='0'><img src="../images/frame-01.jpg" alt="" ondragstart="return false;"></li>
+			<li num='1'><img src="../images/frame-02.jpg" alt="" ondragstart="return false;"></li>
+			<li num='2'><img src="../images/frame-03.jpg" alt="" ondragstart="return false;"></li>
+			<li num='3'><img src="../images/frame-04.jpg" alt="" ondragstart="return false;"></li>
+			<li num='4'><img src="../images/frame-05.jpg" alt="" ondragstart="return false;"></li>
+			<li num='5'><img src="../images/frame-06.jpg" alt="" ondragstart="return false;"></li>
+			<li num='6'><img src="../images/frame-07.jpg" alt="" ondragstart="return false;"></li>
+			<li num='7'><img src="../images/frame-08.jpg" alt="" ondragstart="return false;"></li>
+		</ul>
+	</div>
+</body>
+</html>

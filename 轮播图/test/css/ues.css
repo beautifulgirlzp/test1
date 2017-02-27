@@ -1,0 +1,108 @@
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+ul,
+li,
+ol,
+dl,
+dt,
+dd,
+table,
+tr,
+td,
+form,
+input,
+textarea,
+img,
+b,
+a,
+span,
+body {
+    margin: 0;
+    padding: 0;
+}
+html {
+    -webkit-text-size-adjust: none;
+    font-family: "微软雅黑";
+}
+body {
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+a,
+a:active,
+a:link,
+a:visited,
+a:focus,
+a:hover {
+    text-decoration: none;
+}
+body {
+    background: rgb(246, 247, 249);
+}
+img {
+    border: none;
+    border: 0;
+}
+input,
+textarea {
+    border: none;
+    resize: none;
+    outline: none;
+    border: 0;
+}
+i,
+em {
+    font-style: normal;
+}
+:-moz-placeholder {
+    color: #666;
+}
+
+::-moz-placeholder {
+    color: #666;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #666;
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #666;
+}
+input:focus {
+    outline: none;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+table,
+tr,
+td {
+    border: none;
+    border: 0;
+}
+
+a {
+    cursor: pointer;
+}
+/*左浮动*/
+.fl{float: left;}
+/*右浮动*/
+.fr{float: right;}
+/*清楚浮动*/
+.clear{clear: both;}
+
+
+.ues-header{width:95%;position: fixed;left: 2.5%;top:20px;z-index:9999;}
+.ues-header .logo{display: block;float: left;}
+.ues-header .menu{display: block;float: right;}
